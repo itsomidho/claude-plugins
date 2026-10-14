@@ -1,0 +1,20 @@
+{
+  "name": "itsomidho",
+  "description": "Claude Code plugins by Omid Hosseini",
+  "owner": {
+    "name": "Omid Hosseini",
+    "url": "https://github.com/itsomidho"
+  },
+  "plugins": [
+    {
+      "name": "clawd-statusbar",
+      "source": { "source": "github", "repo": "itsomidho/clawd-statusbar" },
+      "description": "A framed status bar with git, pipeline and usage figures, and Clawd frying an egg while Claude works"
+    },
+    {
+      "name": "clawd-tasks",
+      "source": { "source": "github", "repo": "itsomidho/clawd-tasks" },
+      "description": "A live task board: Claude's plan, and under each task the steps it took, how long it ran, the files it changed and the agents it started"
+    }
+  ]
+}
