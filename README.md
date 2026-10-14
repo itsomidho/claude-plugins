@@ -35,6 +35,31 @@ claude plugin install clawd-tasks --marketplace itsomidho/claude-plugins
 
 In the desktop app: click + next to the prompt box, then Plugins, Add marketplace with `itsomidho/claude-plugins`, then Add plugin.
 
+## Troubleshooting
+
+**`Host key verification failed` on install or update.** Claude Code fetched a plugin from GitHub over SSH, and this machine has no SSH key for GitHub. Either add one (`ssh-keygen -t ed25519`, add it to your GitHub account, then `ssh -T git@github.com` once to accept GitHub's host key), or have git use HTTPS for GitHub:
+
+```
+git config --global url."https://github.com/".insteadOf git@github.com:
+```
+
+Installing from a shell (`claude plugin install …`) also falls back to HTTPS by itself; updating does not.
+
+**A plugin is not found, or a new version doesn't show.** Your copy of the marketplace is older than this repository. Refresh it, then install or update again:
+
+```
+claude plugin marketplace update itsomidho
+```
+
+**You added `itsomidho` from `itsomidho/clawd-statusbar` before.** That older marketplace lists only clawd-statusbar, and two marketplaces can't share a name. Switch to this one (removing the old marketplace may uninstall clawd-statusbar; installing puts it back):
+
+```
+/plugin marketplace remove itsomidho
+/plugin install clawd-statusbar --marketplace itsomidho/claude-plugins
+```
+
+**A plugin is installed but misbehaves.** Each plugin's README has its own troubleshooting: [clawd-statusbar](https://github.com/itsomidho/clawd-statusbar#troubleshooting), [clawd-tasks](https://github.com/itsomidho/clawd-tasks#troubleshooting).
+
 ## Adding a plugin
 
 Add an entry to `.claude-plugin/marketplace.json` whose `source` names the plugin's repository, then check it:
