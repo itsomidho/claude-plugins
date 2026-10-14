@@ -7,6 +7,14 @@ A [Claude Code](https://claude.com/claude-code) plugin marketplace. Each plugin 
 | [**clawd-statusbar**](https://github.com/itsomidho/clawd-statusbar) | A framed status bar under the prompt: model, context, usage limits with reset times, git state, MR/PR pipeline status, and Clawd frying an egg while Claude works |
 | [**clawd-tasks**](https://github.com/itsomidho/clawd-tasks) | A live task board: Claude's plan, and under each task the steps it took, how long it ran, the files it changed and the agents it started |
 
+### clawd-statusbar
+
+![clawd-statusbar through one turn: the model, context and usage limits, the project's git state, and Clawd frying an egg while Claude thinks, reads, edits, runs and browses](https://raw.githubusercontent.com/itsomidho/clawd-statusbar/main/docs/clawd.gif)
+
+### clawd-tasks
+
+![clawd-tasks through one plan: four tasks, each tool call filed under the task in progress, a failed test run, then all four done](https://raw.githubusercontent.com/itsomidho/clawd-tasks/main/docs/board.gif)
+
 ## Install
 
 In Claude Code, type:
