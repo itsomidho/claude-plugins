@@ -6,6 +6,7 @@ A [Claude Code](https://claude.com/claude-code) plugin marketplace. Each plugin 
 |---|---|
 | [**clawd-statusbar**](https://github.com/itsomidho/clawd-statusbar) | A framed status bar under the prompt: model, context, usage limits with reset times, git state, MR/PR pipeline status, and Clawd frying an egg while Claude works |
 | [**clawd-tasks**](https://github.com/itsomidho/clawd-tasks) | A live task board: Claude's plan, and under each task the steps it took, how long it ran, the files it changed and the agents it started |
+| [**clawd-guard**](https://github.com/itsomidho/clawd-guard) | A safety net: blocks or asks before `rm -rf` outside the project, force-pushes to main, discarding uncommitted work, `DROP TABLE` and `chmod 777`, protects `.env` and key files, and catches leaked secrets in writes and commits |
 
 ### clawd-statusbar
 
@@ -15,6 +16,10 @@ A [Claude Code](https://claude.com/claude-code) plugin marketplace. Each plugin 
 
 ![clawd-tasks through one plan: four tasks, each tool call filed under the task in progress, a failed test run, then all four done](https://raw.githubusercontent.com/itsomidho/clawd-tasks/main/docs/board.gif)
 
+### clawd-guard
+
+Before Claude runs a shell command or writes a file, clawd-guard checks it: a risky call is blocked or put to you for approval, with a one-line reason, a toast and a counter above the prompt. Rules are set per user (`~/.claude/clawd-guard.json`) or per project (`.claude/clawd-guard.json`); `/guard` shows what's in effect.
+
 ## Install
 
 In Claude Code, type:
@@ -22,6 +27,7 @@ In Claude Code, type:
 ```
 /plugin install clawd-statusbar --marketplace itsomidho/claude-plugins
 /plugin install clawd-tasks --marketplace itsomidho/claude-plugins
+/plugin install clawd-guard --marketplace itsomidho/claude-plugins
 ```
 
 Answer `y` to add the marketplace the first time, then choose a scope. Once it is added, `/plugin install <plugin>@itsomidho` is enough.
@@ -31,6 +37,7 @@ From a shell:
 ```
 claude plugin install clawd-statusbar --marketplace itsomidho/claude-plugins
 claude plugin install clawd-tasks --marketplace itsomidho/claude-plugins
+claude plugin install clawd-guard --marketplace itsomidho/claude-plugins
 ```
 
 In the desktop app: click + next to the prompt box, then Plugins, Add marketplace with `itsomidho/claude-plugins`, then Add plugin.

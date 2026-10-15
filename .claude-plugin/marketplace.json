@@ -15,6 +15,11 @@
       "name": "clawd-tasks",
       "source": { "source": "github", "repo": "itsomidho/clawd-tasks" },
       "description": "A live task board: Claude's plan, and under each task the steps it took, how long it ran, the files it changed and the agents it started"
+    },
+    {
+      "name": "clawd-guard",
+      "source": { "source": "github", "repo": "itsomidho/clawd-guard" },
+      "description": "A safety net: stops risky shell commands, writes to secret files and leaked keys before they run, with a band that counts what it caught"
     }
   ]
 }
