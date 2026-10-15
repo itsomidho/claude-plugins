@@ -7,6 +7,7 @@ A [Claude Code](https://claude.com/claude-code) plugin marketplace. Each plugin 
 | [**clawd-statusbar**](https://github.com/itsomidho/clawd-statusbar) | A framed status bar under the prompt: model, context, usage limits with reset times, git state, MR/PR pipeline status, and Clawd frying an egg while Claude works |
 | [**clawd-tasks**](https://github.com/itsomidho/clawd-tasks) | A live task board: Claude's plan, and under each task the steps it took, how long it ran, the files it changed and the agents it started |
 | [**clawd-guard**](https://github.com/itsomidho/clawd-guard) | A safety net: blocks or asks before `rm -rf` outside the project, force-pushes to main, discarding uncommitted work, `DROP TABLE` and `chmod 777`, protects `.env` and key files, and catches leaked secrets in writes and commits |
+| [**clawd-notify**](https://github.com/itsomidho/clawd-notify) | Tells you when Claude is done or needs your approval: a desktop notification, a chime, and optionally a push to your phone through ntfy |
 
 ### clawd-statusbar
 
@@ -22,6 +23,12 @@ A [Claude Code](https://claude.com/claude-code) plugin marketplace. Each plugin 
 
 Before Claude runs a shell command or writes a file, clawd-guard checks it: a risky call is blocked or put to you for approval, with a one-line reason, a toast and a counter above the prompt. Rules are set per user (`~/.claude/clawd-guard.json`) or per project (`.claude/clawd-guard.json`); `/guard` shows what's in effect.
 
+### clawd-notify
+
+![clawd-notify while you're away: a long turn ends with a desktop notification, a chime and a push to the phone; then a deploy waits on approval, and the desktop and the phone say so](https://raw.githubusercontent.com/itsomidho/clawd-notify/main/docs/notify.gif)
+
+Only turns that ran a while notify, so quick answers you watched stay quiet. `/notify test` tries every channel; settings are under `/config`.
+
 ## Install
 
 In Claude Code, type:
@@ -30,6 +37,7 @@ In Claude Code, type:
 /plugin install clawd-statusbar --marketplace itsomidho/claude-plugins
 /plugin install clawd-tasks --marketplace itsomidho/claude-plugins
 /plugin install clawd-guard --marketplace itsomidho/claude-plugins
+/plugin install clawd-notify --marketplace itsomidho/claude-plugins
 ```
 
 Answer `y` to add the marketplace the first time, then choose a scope. Once it is added, `/plugin install <plugin>@itsomidho` is enough.
@@ -40,6 +48,7 @@ From a shell:
 claude plugin install clawd-statusbar --marketplace itsomidho/claude-plugins
 claude plugin install clawd-tasks --marketplace itsomidho/claude-plugins
 claude plugin install clawd-guard --marketplace itsomidho/claude-plugins
+claude plugin install clawd-notify --marketplace itsomidho/claude-plugins
 ```
 
 In the desktop app: click + next to the prompt box, then Plugins, Add marketplace with `itsomidho/claude-plugins`, then Add plugin.
