@@ -18,6 +18,8 @@ A [Claude Code](https://claude.com/claude-code) plugin marketplace. Each plugin 
 
 ### clawd-guard
 
+![clawd-guard through one turn: a force-push to main blocked, a write to .env blocked, and a git reset --hard over uncommitted work put to the person, who declines; the band above the prompt counts each catch](https://raw.githubusercontent.com/itsomidho/clawd-guard/main/docs/guard.gif)
+
 Before Claude runs a shell command or writes a file, clawd-guard checks it: a risky call is blocked or put to you for approval, with a one-line reason, a toast and a counter above the prompt. Rules are set per user (`~/.claude/clawd-guard.json`) or per project (`.claude/clawd-guard.json`); `/guard` shows what's in effect.
 
 ## Install
