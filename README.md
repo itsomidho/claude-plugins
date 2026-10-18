@@ -8,7 +8,7 @@ A [Claude Code](https://claude.com/claude-code) plugin marketplace. Each plugin 
 | [**clawd-tasks**](https://github.com/itsomidho/clawd-tasks) | A live task board: Claude's plan, and under each task the steps it took, how long it ran, the files it changed and the agents it started |
 | [**clawd-guard**](https://github.com/itsomidho/clawd-guard) | A safety net: blocks or asks before `rm -rf` outside the project, force-pushes to main, discarding uncommitted work, `DROP TABLE` and `chmod 777`, protects `.env` and key files, and catches leaked secrets in writes and commits |
 | [**clawd-notify**](https://github.com/itsomidho/clawd-notify) | Tells you when Claude is done or needs your approval: a desktop notification, a chime, and optionally a push to your phone through ntfy |
-| [**clawd-git**](https://github.com/itsomidho/clawd-git) | A live git side pane: changed files, colored diffs, the commit graph, a file tree with icons and change markers, and Claude's plan from clawd-tasks |
+| [**clawd-git**](https://github.com/itsomidho/clawd-git) | A live git panel beside the conversation: the file tree, changes, colored diffs and the commit graph; marks the files Claude changed, stages and commits, and asks Claude to review a diff |
 
 ### clawd-statusbar
 
@@ -32,7 +32,9 @@ Only turns that ran a while notify, so quick answers you watched stay quiet. `/n
 
 ### clawd-git
 
-One panel docked beside the conversation, styled like clawd-statusbar, with tabs for the file tree (with search), the changes, the commit graph across branches, and Claude's plan from clawd-tasks; a diff opens in place. The header stays pinned while the rows scroll, and anything wider than the panel slides sideways. File icons follow your fonts, so nothing draws as boxes without a Nerd Font. It refreshes while shown and right after each edit. `/git-pane` shows or hides it; set **Placement** to `prompt` to have it above the prompt instead.
+![clawd-git through one session: Claude's edits marked, the By Claude filter, a diff with Review, staging, a drafted commit message and the commit graph](https://raw.githubusercontent.com/itsomidho/clawd-git/main/docs/demo.gif)
+
+One panel docked beside the conversation, styled like clawd-statusbar, with tabs for the file tree (with search), the changes and the commit graph; a diff opens in place. Files Claude changes are marked, and **By Claude** narrows the list to them. Stage, unstage, discard and commit from the panel (it drafts the commit message), or send a diff to Claude for review. `/git-pane` shows or hides it. Pairs with clawd-tasks: the plan under the prompt, the files beside it.
 
 ## Install
 

@@ -29,7 +29,7 @@
     {
       "name": "clawd-git",
       "source": { "source": "github", "repo": "itsomidho/clawd-git" },
-      "description": "A live git side pane: changed files, diffs, the commit graph, a file tree with icons, and Claude's plan from clawd-tasks"
+      "description": "A live git panel beside the conversation: files, changes, diffs and the commit graph; marks what Claude changed, stages, commits and asks Claude to review"
     }
   ]
 }
