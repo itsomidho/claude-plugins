@@ -32,7 +32,7 @@ Only turns that ran a while notify, so quick answers you watched stay quiet. `/n
 
 ### clawd-git
 
-A **Git** pane docked beside the conversation, with tabs for the changed files, their diffs, the commit graph across branches, and Claude's plan (from clawd-tasks); and a **Files** pane with the folder tree on disk, file icons (needs a Nerd Font) and change markers. It refreshes while shown and right after each edit. `/git-pane` opens it.
+One panel docked beside the conversation, styled like clawd-statusbar, with tabs for the file tree (with search), the changes, the commit graph across branches, and Claude's plan from clawd-tasks; a diff opens in place. The header stays pinned while the rows scroll, and anything wider than the panel slides sideways. File icons follow your fonts, so nothing draws as boxes without a Nerd Font. It refreshes while shown and right after each edit. `/git-pane` shows or hides it; set **Placement** to `prompt` to have it above the prompt instead.
 
 ## Install
 
