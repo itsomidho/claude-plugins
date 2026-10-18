@@ -2,13 +2,13 @@
 
 A [Claude Code](https://claude.com/claude-code) plugin marketplace. Each plugin lives in its own repository and works on its own: install any of them, or all.
 
-| Plugin | |
-|---|---|
-| [**clawd-statusbar**](https://github.com/itsomidho/clawd-statusbar) | A framed status bar under the prompt: model, context, usage limits with reset times, git state, MR/PR pipeline status, and Clawd frying an egg while Claude works |
-| [**clawd-tasks**](https://github.com/itsomidho/clawd-tasks) | A live task board: Claude's plan, and under each task the steps it took, how long it ran, the files it changed and the agents it started |
-| [**clawd-guard**](https://github.com/itsomidho/clawd-guard) | A safety net: blocks or asks before `rm -rf` outside the project, force-pushes to main, discarding uncommitted work, `DROP TABLE` and `chmod 777`, protects `.env` and key files, and catches leaked secrets in writes and commits |
-| [**clawd-notify**](https://github.com/itsomidho/clawd-notify) | Tells you when Claude is done or needs your approval: a desktop notification, a chime, and optionally a push to your phone through ntfy |
-| [**clawd-git**](https://github.com/itsomidho/clawd-git) | A live git panel beside the conversation: the file tree, changes, colored diffs and the commit graph; marks the files Claude changed, stages and commits, and asks Claude to review a diff |
+| Plugin | Release | |
+|---|---|---|
+| [**clawd-statusbar**](https://github.com/itsomidho/clawd-statusbar) | [![clawd-statusbar release](https://img.shields.io/github/v/release/itsomidho/clawd-statusbar?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-statusbar/releases) | A framed status bar under the prompt: model, context, usage limits with reset times, git state, MR/PR pipeline status, and Clawd frying an egg while Claude works |
+| [**clawd-tasks**](https://github.com/itsomidho/clawd-tasks) | [![clawd-tasks release](https://img.shields.io/github/v/release/itsomidho/clawd-tasks?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-tasks/releases) | A live task board: Claude's plan, and under each task the steps it took, how long it ran, the files it changed and the agents it started |
+| [**clawd-guard**](https://github.com/itsomidho/clawd-guard) | [![clawd-guard release](https://img.shields.io/github/v/release/itsomidho/clawd-guard?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-guard/releases) | A safety net: blocks or asks before `rm -rf` outside the project, force-pushes to main, discarding uncommitted work, `DROP TABLE` and `chmod 777`, protects `.env` and key files, and catches leaked secrets in writes and commits |
+| [**clawd-notify**](https://github.com/itsomidho/clawd-notify) | [![clawd-notify release](https://img.shields.io/github/v/release/itsomidho/clawd-notify?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-notify/releases) | Tells you when Claude is done or needs your approval: a desktop notification, a chime, and optionally a push to your phone through ntfy |
+| [**clawd-git**](https://github.com/itsomidho/clawd-git) | [![clawd-git release](https://img.shields.io/github/v/release/itsomidho/clawd-git?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-git/releases) | A live git panel beside the conversation: the file tree, changes, colored diffs and the commit graph; marks the files Claude changed, stages and commits, and asks Claude to review a diff |
 
 ### clawd-statusbar
 
@@ -61,6 +61,15 @@ claude plugin install clawd-git --marketplace itsomidho/claude-plugins
 ```
 
 In the desktop app: click + next to the prompt box, then Plugins, Add marketplace with `itsomidho/claude-plugins`, then Add plugin.
+
+## Updating
+
+```
+claude plugin marketplace update itsomidho
+claude plugin update <plugin>@itsomidho
+```
+
+Then `/reload-plugins`. What changed in each version is in the plugin's releases: [clawd-statusbar](https://github.com/itsomidho/clawd-statusbar/releases), [clawd-tasks](https://github.com/itsomidho/clawd-tasks/releases), [clawd-guard](https://github.com/itsomidho/clawd-guard/releases), [clawd-notify](https://github.com/itsomidho/clawd-notify/releases), [clawd-git](https://github.com/itsomidho/clawd-git/releases).
 
 ## Troubleshooting
 
