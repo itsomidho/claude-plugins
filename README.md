@@ -9,6 +9,7 @@ A [Claude Code](https://claude.com/claude-code) plugin marketplace. Each plugin 
 | [**clawd-guard**](https://github.com/itsomidho/clawd-guard) | [![clawd-guard release](https://img.shields.io/github/v/release/itsomidho/clawd-guard?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-guard/releases) | A safety net: blocks or asks before `rm -rf` outside the project, force-pushes to main, discarding uncommitted work, `DROP TABLE` and `chmod 777`, protects `.env` and key files, and catches leaked secrets in writes and commits |
 | [**clawd-notify**](https://github.com/itsomidho/clawd-notify) | [![clawd-notify release](https://img.shields.io/github/v/release/itsomidho/clawd-notify?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-notify/releases) | Tells you when Claude is done or needs your approval: a desktop notification, a chime, and optionally a push to your phone through ntfy |
 | [**clawd-git**](https://github.com/itsomidho/clawd-git) | [![clawd-git release](https://img.shields.io/github/v/release/itsomidho/clawd-git?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-git/releases) | A live git panel beside the conversation: the file tree, changes, colored diffs and the commit graph; marks the files Claude changed, stages and commits, and asks Claude to review a diff |
+| [**clawd-logs**](https://github.com/itsomidho/clawd-logs) | [![clawd-logs release](https://img.shields.io/github/v/release/itsomidho/clawd-logs?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-logs/releases) | Watches your project's error logs (WordPress `debug.log`, nginx, any log file): new errors above the prompt, grouped, with a Fix button, and Claude hears about the ones its own work caused |
 
 ### clawd-statusbar
 
@@ -36,6 +37,10 @@ Only turns that ran a while notify, so quick answers you watched stay quiet. `/n
 
 One panel docked beside the conversation, styled like clawd-statusbar, with tabs for the file tree (with search), the changes and the commit graph; a diff opens in place. Files Claude changes are marked, and **By Claude** narrows the list to them. Stage, unstage, discard and commit from the panel (it drafts the commit message), or send a diff to Claude for review. `/git-pane` shows or hides it. Pairs with clawd-tasks: the plan under the prompt, the files beside it.
 
+### clawd-logs
+
+New errors in the project's logs show above the prompt, grouped with a count, with **Fix** (send it to Claude) and **Dismiss**. It finds WordPress's `debug.log` (and Bedrock's, Laravel's, and a wpdev stack's nginx log) by itself; add other files in `.claude/clawd-logs.json`. When an error appears while Claude works, Claude reads it, stack trace included, right after the tool call that caused it, so a "critical error on this website" doesn't go unnoticed. `/logs` lists the session's errors.
+
 ## Install
 
 In Claude Code, type:
@@ -46,6 +51,7 @@ In Claude Code, type:
 /plugin install clawd-guard --marketplace itsomidho/claude-plugins
 /plugin install clawd-notify --marketplace itsomidho/claude-plugins
 /plugin install clawd-git --marketplace itsomidho/claude-plugins
+/plugin install clawd-logs --marketplace itsomidho/claude-plugins
 ```
 
 Answer `y` to add the marketplace the first time, then choose a scope. Once it is added, `/plugin install <plugin>@itsomidho` is enough.
@@ -58,6 +64,7 @@ claude plugin install clawd-tasks --marketplace itsomidho/claude-plugins
 claude plugin install clawd-guard --marketplace itsomidho/claude-plugins
 claude plugin install clawd-notify --marketplace itsomidho/claude-plugins
 claude plugin install clawd-git --marketplace itsomidho/claude-plugins
+claude plugin install clawd-logs --marketplace itsomidho/claude-plugins
 ```
 
 In the desktop app: click + next to the prompt box, then Plugins, Add marketplace with `itsomidho/claude-plugins`, then Add plugin.
@@ -69,7 +76,7 @@ claude plugin marketplace update itsomidho
 claude plugin update <plugin>@itsomidho
 ```
 
-Then `/reload-plugins`. What changed in each version is in the plugin's releases: [clawd-statusbar](https://github.com/itsomidho/clawd-statusbar/releases), [clawd-tasks](https://github.com/itsomidho/clawd-tasks/releases), [clawd-guard](https://github.com/itsomidho/clawd-guard/releases), [clawd-notify](https://github.com/itsomidho/clawd-notify/releases), [clawd-git](https://github.com/itsomidho/clawd-git/releases).
+Then `/reload-plugins`. What changed in each version is in the plugin's releases: [clawd-statusbar](https://github.com/itsomidho/clawd-statusbar/releases), [clawd-tasks](https://github.com/itsomidho/clawd-tasks/releases), [clawd-guard](https://github.com/itsomidho/clawd-guard/releases), [clawd-notify](https://github.com/itsomidho/clawd-notify/releases), [clawd-git](https://github.com/itsomidho/clawd-git/releases), [clawd-logs](https://github.com/itsomidho/clawd-logs/releases).
 
 ## Troubleshooting
 

@@ -30,6 +30,11 @@
       "name": "clawd-git",
       "source": { "source": "github", "repo": "itsomidho/clawd-git" },
       "description": "A live git panel beside the conversation: files, changes, diffs and the commit graph; marks what Claude changed, stages, commits and asks Claude to review"
+    },
+    {
+      "name": "clawd-logs",
+      "source": { "source": "github", "repo": "itsomidho/clawd-logs" },
+      "description": "Watches your project's error logs (WordPress debug.log, nginx, any log file): new errors above the prompt, grouped, with a Fix button, and Claude hears about the ones its own work caused"
     }
   ]
 }
