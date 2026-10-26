@@ -35,6 +35,11 @@
       "name": "clawd-logs",
       "source": { "source": "github", "repo": "itsomidho/clawd-logs" },
       "description": "Watches your project's error logs (WordPress debug.log, nginx, any log file): new errors above the prompt, grouped, with a Fix button, and Claude hears about the ones its own work caused"
+    },
+    {
+      "name": "clawd-debug",
+      "source": { "source": "github", "repo": "itsomidho/clawd-debug" },
+      "description": "A step debugger pane: set a breakpoint, let Claude run the code with test data, and step line by line with every value shown (Python, Node, PHP)"
     }
   ]
 }

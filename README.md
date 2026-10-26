@@ -10,6 +10,7 @@ A [Claude Code](https://claude.com/claude-code) plugin marketplace. Each plugin 
 | [**clawd-notify**](https://github.com/itsomidho/clawd-notify) | [![clawd-notify release](https://img.shields.io/github/v/release/itsomidho/clawd-notify?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-notify/releases) | Tells you when Claude is done or needs your approval: a desktop notification, a chime, and optionally a push to your phone through ntfy |
 | [**clawd-git**](https://github.com/itsomidho/clawd-git) | [![clawd-git release](https://img.shields.io/github/v/release/itsomidho/clawd-git?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-git/releases) | A live git panel beside the conversation: the file tree, changes, colored diffs and the commit graph; marks the files Claude changed, stages and commits, and asks Claude to review a diff |
 | [**clawd-logs**](https://github.com/itsomidho/clawd-logs) | [![clawd-logs release](https://img.shields.io/github/v/release/itsomidho/clawd-logs?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-logs/releases) | Watches your project's error logs (WordPress `debug.log`, nginx, any log file): new errors above the prompt, grouped, with a Fix button, and Claude hears about the ones its own work caused |
+| [**clawd-debug**](https://github.com/itsomidho/clawd-debug) | [![clawd-debug release](https://img.shields.io/github/v/release/itsomidho/clawd-debug?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-debug/releases) | A step debugger pane: set a breakpoint, let Claude run the code with test data, and step line by line with every variable and what each line set shown next to the code (Python, Node, PHP with Xdebug) |
 
 ### clawd-statusbar
 
@@ -41,6 +42,10 @@ One panel docked beside the conversation, styled like clawd-statusbar, with tabs
 
 New errors in the project's logs show above the prompt, grouped with a count, with **Fix** (send it to Claude) and **Dismiss**. It finds WordPress's `debug.log` (and Bedrock's, Laravel's, and a wpdev stack's nginx log) by itself; add other files in `.claude/clawd-logs.json`. When an error appears while Claude works, Claude reads it, stack trace included, right after the tool call that caused it, so a "critical error on this website" doesn't go unnoticed. `/logs` lists the session's errors.
 
+### clawd-debug
+
+A debugger beside the conversation, no editor needed. `/dbg <file>` shows the file; press `b` for a breakpoint and `t`, and Claude writes a small script that calls the code with realistic test data and starts the run. Step with `n` `s` `o` `c` while the values show next to each line. Python (debugpy, `/dbg setup`), Node (built in) and PHP with Xdebug, also inside a Docker container, with WordPress loaded through WP-CLI. With clawd-git 0.4.4, a ▷ on a file's row opens it here. You can also just ask Claude: "debug `calc_total` with test data".
+
 ## Install
 
 In Claude Code, type:
@@ -52,6 +57,7 @@ In Claude Code, type:
 /plugin install clawd-notify --marketplace itsomidho/claude-plugins
 /plugin install clawd-git --marketplace itsomidho/claude-plugins
 /plugin install clawd-logs --marketplace itsomidho/claude-plugins
+/plugin install clawd-debug --marketplace itsomidho/claude-plugins
 ```
 
 Answer `y` to add the marketplace the first time, then choose a scope. Once it is added, `/plugin install <plugin>@itsomidho` is enough.
@@ -65,6 +71,7 @@ claude plugin install clawd-guard --marketplace itsomidho/claude-plugins
 claude plugin install clawd-notify --marketplace itsomidho/claude-plugins
 claude plugin install clawd-git --marketplace itsomidho/claude-plugins
 claude plugin install clawd-logs --marketplace itsomidho/claude-plugins
+claude plugin install clawd-debug --marketplace itsomidho/claude-plugins
 ```
 
 In the desktop app: click + next to the prompt box, then Plugins, Add marketplace with `itsomidho/claude-plugins`, then Add plugin.
@@ -76,7 +83,7 @@ claude plugin marketplace update itsomidho
 claude plugin update <plugin>@itsomidho
 ```
 
-Then `/reload-plugins`. What changed in each version is in the plugin's releases: [clawd-statusbar](https://github.com/itsomidho/clawd-statusbar/releases), [clawd-tasks](https://github.com/itsomidho/clawd-tasks/releases), [clawd-guard](https://github.com/itsomidho/clawd-guard/releases), [clawd-notify](https://github.com/itsomidho/clawd-notify/releases), [clawd-git](https://github.com/itsomidho/clawd-git/releases), [clawd-logs](https://github.com/itsomidho/clawd-logs/releases).
+Then `/reload-plugins`. What changed in each version is in the plugin's releases: [clawd-statusbar](https://github.com/itsomidho/clawd-statusbar/releases), [clawd-tasks](https://github.com/itsomidho/clawd-tasks/releases), [clawd-guard](https://github.com/itsomidho/clawd-guard/releases), [clawd-notify](https://github.com/itsomidho/clawd-notify/releases), [clawd-git](https://github.com/itsomidho/clawd-git/releases), [clawd-logs](https://github.com/itsomidho/clawd-logs/releases), [clawd-debug](https://github.com/itsomidho/clawd-debug/releases).
 
 ## Troubleshooting
 
