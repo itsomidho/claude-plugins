@@ -16,7 +16,7 @@ PROMPT = ('Set up local config in two separate steps. First, create the file .en
 
 # An uncommitted change for the checkout to throw away.
 (DEMO / 'README.md').write_text((DEMO / 'README.md').read_text() + '\nRun the tests with `node --test`.\n')
-s = Session('clawdrec', DEMO, cols=124, rows=40)
+s = Session('clawdrec', DEMO, cols=100, rows=32)
 time.sleep(10)
 s.type('/git-pane close', wait=3)
 frames = []
@@ -25,7 +25,7 @@ s.type(PROMPT, wait=0.5)
 start = time.time()
 asked = False
 while time.time() - start < 240:
-    frames.append((s.snap(), 700))
+    frames.append((s.snap(), 400))
     text = s.text()
     if not asked and 'Do you want to proceed?' in text:
         # Let the question show, then decline it.
@@ -34,7 +34,7 @@ while time.time() - start < 240:
         asked = True
     if re.search(r'for \d+(m \d+)?s · done', text) and time.time() - start > 10:
         break
-    time.sleep(0.7)
+    time.sleep(0.4)
 s.film(4, frames, every=1.0)
 (HERE / 'frames').mkdir(exist_ok=True)
 (HERE / 'frames/guard.json').write_text(json.dumps(frames))

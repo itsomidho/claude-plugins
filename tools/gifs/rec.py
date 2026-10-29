@@ -22,6 +22,7 @@ FALLBACK = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSansMono.t
 MAIN = str(FONTS / 'JetBrainsMonoNerdFontMono-Regular.ttf')
 # Where a character the main font lacks is drawn from, in order.
 CHAIN = [
+    str(Path.home() / '.local/share/fonts/FiraCodeNerdFont/FiraCodeNerdFontMono-Regular.ttf'),
     '/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf',
     '/usr/share/fonts/truetype/noto/NotoSansSymbols-Regular.ttf',
     '/usr/share/fonts/truetype/noto/NotoSansSymbols2-Regular.ttf',
@@ -128,7 +129,15 @@ def font_for(ch, st):
 def draw(snap, box):
     """A snap's text, cropped to box = (col0, row0, col1, row1), as an image."""
     c0, r0, c1, r1 = box
-    lines = snap.split('\n')[r0:r1]
+    lines = snap.split('\n')
+    if r0 < 0:
+        # Counted from the bottom: the screen's last rows, its blank tail left out.
+        while lines and not re.sub(r'\x1b\[[0-9;:]*m', '', lines[-1]).strip():
+            lines.pop()
+        lines = lines[r0:]
+        r0, r1 = 0, len(lines)
+    else:
+        lines = lines[r0:r1]
     im = Image.new('RGB', ((c1 - c0) * CELL_W, (r1 - r0) * CELL_H), BG)
     d = ImageDraw.Draw(im)
     for y, line in enumerate(lines):
@@ -198,6 +207,20 @@ def scrub(snap):
         snap = snap.replace(f' {text} ', '─' * (len(text) + 2))
     # Home folders as ~, as the plugins themselves write them.
     snap = re.sub(r'/home/[a-z][a-z0-9_-]*/', '~/', snap)
+    # Claude Code's tips are not the plugin's: their lines go blank.
+    # A tip can wrap: its indented lines after it go too.
+    kept, in_tip = [], False
+    for line in snap.split('\n'):
+        plain = re.sub(r'\x1b\[[0-9;:]*m', '', line)
+        if re.search(r'Tip: ', plain):
+            in_tip = True
+            kept.append('')
+        elif in_tip and plain.startswith('    ') and plain.strip():
+            kept.append('')
+        else:
+            in_tip = False
+            kept.append(line)
+    snap = '\n'.join(kept)
     return snap
 
 
@@ -246,6 +269,10 @@ class Session:
     def click(self, row, col, wait=1.0):
         """1-based screen row and column."""
         self.raw(f'\x1b[<0;{col};{row}M'); time.sleep(0.15); self.raw(f'\x1b[<0;{col};{row}m'); time.sleep(wait)
+
+    def park(self, row=2, col=4):
+        """Moves the pointer away (no button held), so no hover is left drawn."""
+        self.raw(f'\x1b[<35;{col};{row}M'); time.sleep(0.2)
 
     def wheel(self, row, col, down=True, n=1, wait=0.4):
         for _ in range(n):

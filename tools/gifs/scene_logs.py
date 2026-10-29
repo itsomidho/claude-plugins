@@ -17,7 +17,7 @@ FATAL = ("[29-Oct-2026 15:42:0N UTC] PHP Fatal error:  Uncaught Error: Call to u
          f"  thrown in {CART} on line 12\n")
 
 LOG.write_text('')
-s = Session('clawdrec', DEMO, cmd=f'claude --plugin-dir {Path.home()}/Projects/clawd-logs', cols=124, rows=40)
+s = Session('clawdrec', DEMO, cols=100, rows=32)
 time.sleep(12)
 s.type('/git-pane close', wait=3)
 frames = []
@@ -35,10 +35,10 @@ for i, line in enumerate(s.text().split('\n')):
         break
 start = time.time()
 while time.time() - start < 180:
-    frames.append((s.snap(), 700))
+    frames.append((s.snap(), 400))
     if re.search(r'for \d+(m \d+)?s · done', s.text()) and time.time() - start > 8:
         break
-    time.sleep(0.7)
+    time.sleep(0.4)
 s.film(3, frames, every=1.0)
 (HERE / 'frames').mkdir(exist_ok=True)
 (HERE / 'frames/logs.json').write_text(json.dumps(frames))

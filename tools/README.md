@@ -27,5 +27,9 @@ The GIFs in each plugin's README are recordings of real Claude Code sessions in 
 
 - `gifs/rec.py` drives a throwaway Claude Code in its own tmux server (prompts, keys, mouse clicks and the wheel), snaps the screen with its colours, and draws the snaps as a GIF with the terminal's fonts (JetBrains Mono Nerd Font, with DejaVu and Noto Symbols for what it lacks). It leaves out hyperlink codes and the session's title, and writes home folders as `~`.
 - `gifs/scene_*.py` record one plugin each into `gifs/frames/` (kept out of git), so a GIF can be cropped or drawn again without recording again; `gifs/check_*.py` replay a fix in a real session.
+- `gifs/compose.py` finishes a GIF: the crop in a window (title bar, padding, rounded corners), a numbered caption under it naming each step (rules matched against the screen, never going back), pacing that shortens waits and holds each new step and the last frame, and one palette for every frame.
+- `gifs/render_all.py` holds each GIF's crop, title and captions: `python3 render_all.py [clawd board guard logs demo debug]` draws them into `gifs/out/`, ready to copy to each plugin's `docs/`.
+
+Record at 100 columns (the pane GIFs crop a 200-column screen to the pane): GitHub shows a README image about 830 px wide, so a wider GIF shrinks until its text is hard to read.
 
 Needs tmux, Python 3 with Pillow and fontTools, and the fonts above.

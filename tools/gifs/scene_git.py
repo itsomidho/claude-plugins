@@ -28,6 +28,7 @@ def press(label, after=None, pause=2.5, dx=2):
         at = line.find(label, 105)
         if at >= 0 and (after is None or after in line):
             s.click(i + 1, len(line[:at].encode('utf-16-le')) // 2 + 1 + dx, wait=0.3)
+            s.park()
             film(pause)
             return True
     print('not found:', label)
@@ -39,10 +40,10 @@ film(2)
 s.type(PROMPT, wait=0.5)
 start = time.time()
 while time.time() - start < 180:
-    frames.append((s.snap(), 700))
+    frames.append((s.snap(), 400))
     if re.search(r'for \d+(m \d+)?s · done', s.text()) and time.time() - start > 8:
         break
-    time.sleep(0.7)
+    time.sleep(0.4)
 film(2)
 # Files: open src, where Claude's file is marked.
 press(' src', after='│')

@@ -18,7 +18,7 @@ PROMPT = (
     'Keep your answers short.'
 )
 
-s = Session('clawdrec', DEMO, cols=124, rows=40)
+s = Session('clawdrec', DEMO, cols=100, rows=42)
 time.sleep(10)
 if 'trust this folder' in s.text():
     s.keys('Down', 'Enter', wait=1)
@@ -31,10 +31,10 @@ s.type(PROMPT, wait=0.5)
 start = time.time()
 # Until the turn ends: Claude Code's "… for 1m 2s · done" line.
 while time.time() - start < 420:
-    frames.append((s.snap(), 700))
+    frames.append((s.snap(), 400))
     if re.search(r'for \d+(m \d+)?s · done', s.text()) and time.time() - start > 20:
         break
-    time.sleep(0.7)
+    time.sleep(0.4)
 s.film(4, frames, every=1.0)
 (HERE / 'frames').mkdir(exist_ok=True)
 (HERE / 'frames/turn.json').write_text(json.dumps(frames))
