@@ -34,7 +34,7 @@ GIFS = {
     ]),
     'logs': dict(frames='logs', box=(0, 6, 100, 27), title='clawd-logs · Claude Code', target_s=14, until=r'Fix this error[\s\S]*\n● ', captions=[
         (r'Git panel hidden', "A fatal error lands in the site's debug.log, three times"),
-        (r'FATAL', 'clawd-logs shows it above the prompt: grouped ×3, with its file and line'),
+        (r'FATAL[\s\S]*×3', 'clawd-logs shows it above the prompt: grouped ×3, with its file and line'),
         (r'Fix this error', 'Fix hands it to Claude, stack trace included'),
     ]),
     'demo': dict(frames='git', box=PANE, title='clawd-git · Claude Code', target_s=20, captions=[
