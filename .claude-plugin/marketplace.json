@@ -9,7 +9,7 @@
     {
       "name": "clawd-statusbar",
       "source": { "source": "github", "repo": "itsomidho/clawd-statusbar" },
-      "description": "A framed status bar with git, pipeline and usage figures, and Clawd frying an egg while Claude works"
+      "description": "A framed status bar under the prompt: context, usage limits with reset times, git state, MR/PR pipeline status, and Clawd frying an egg while Claude works"
     },
     {
       "name": "clawd-tasks",
@@ -19,7 +19,7 @@
     {
       "name": "clawd-guard",
       "source": { "source": "github", "repo": "itsomidho/clawd-guard" },
-      "description": "A safety net: stops risky shell commands, writes to secret files and leaked keys before they run, with a band that counts what it caught"
+      "description": "A safety net: stops risky shell commands, writes to secret files and leaked keys before they run"
     },
     {
       "name": "clawd-notify",
@@ -29,17 +29,17 @@
     {
       "name": "clawd-git",
       "source": { "source": "github", "repo": "itsomidho/clawd-git" },
-      "description": "A live git panel beside the conversation: files, changes, diffs and the commit graph; marks what Claude changed, stages, commits and asks Claude to review"
+      "description": "A live git panel beside the conversation: the file tree, changes, colored diffs and the commit graph; marks what Claude changed, stages, commits and asks Claude to review"
     },
     {
       "name": "clawd-logs",
       "source": { "source": "github", "repo": "itsomidho/clawd-logs" },
-      "description": "Watches your project's error logs (WordPress debug.log, nginx, any log file): new errors above the prompt, grouped, with a Fix button, and Claude hears about the ones its own work caused"
+      "description": "Watches your project's error logs (WordPress debug.log, nginx, any log file): new errors show above the prompt, grouped, with a Fix button, and Claude hears about the ones its own work caused"
     },
     {
       "name": "clawd-debug",
       "source": { "source": "github", "repo": "itsomidho/clawd-debug" },
-      "description": "A step debugger pane: set a breakpoint, let Claude run the code with test data, and step line by line with every value shown (Python, Node, PHP)"
+      "description": "A step debugger beside the conversation: set a breakpoint, let Claude run your code with test data, and step line by line while every variable and line value shows"
     }
   ]
 }

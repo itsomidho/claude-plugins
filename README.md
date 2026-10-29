@@ -14,17 +14,27 @@ A [Claude Code](https://claude.com/claude-code) plugin marketplace. Each plugin 
 
 ### clawd-statusbar
 
-![clawd-statusbar through one turn: the model, context and usage limits, the project's git state, and Clawd frying an egg while Claude thinks, reads, edits, runs and browses](https://raw.githubusercontent.com/itsomidho/clawd-statusbar/main/docs/clawd.gif)
+![clawd-statusbar through one real turn: the model, context and usage limits, the branch as a chip, and Clawd frying an egg and saying what Claude is doing while it works](https://raw.githubusercontent.com/itsomidho/clawd-statusbar/main/docs/clawd.gif)
+
+A framed bar under the prompt: the model, how full the context is, the 5-hour and weekly limits with their reset times, then the project's folder, branch, uncommitted files, ahead/behind, stashes, a git operation in progress, and the branch's open MR or PR with its pipeline. On the right, Clawd fries an egg while Claude works and says what it is doing. `/statusbar` turns it off and on.
+
+[Wiki](https://github.com/itsomidho/clawd-statusbar/wiki) · [Releases](https://github.com/itsomidho/clawd-statusbar/releases)
 
 ### clawd-tasks
 
-![clawd-tasks through one plan: four tasks, each tool call filed under the task in progress, a failed test run, then all four done](https://raw.githubusercontent.com/itsomidho/clawd-tasks/main/docs/board.gif)
+![The task board through one real plan: three tasks, each tool call filed under the task in progress, a failed test run that is retried, then all three done](https://raw.githubusercontent.com/itsomidho/clawd-tasks/main/docs/board.gif)
+
+When Claude makes a plan, the board lists its tasks under the prompt with a progress bar, and under the task in progress the steps Claude takes: each tool call, what it worked on, how long it ran, and the lines it changed. It leaves when the plan is done. `/board export` copies the plan as Markdown, for an MR description.
+
+[Wiki](https://github.com/itsomidho/clawd-tasks/wiki) · [Releases](https://github.com/itsomidho/clawd-tasks/releases)
 
 ### clawd-guard
 
-![clawd-guard through one turn: a force-push to main blocked, a write to .env blocked, and a git reset --hard over uncommitted work put to the person, who declines; the band above the prompt counts each catch](https://raw.githubusercontent.com/itsomidho/clawd-guard/main/docs/guard.gif)
+![clawd-guard through one real turn: a write to .env is blocked, then git checkout -- . over uncommitted work is put to the person, who declines; the band above the prompt shows each catch and counts them](https://raw.githubusercontent.com/itsomidho/clawd-guard/main/docs/guard.gif)
 
 Before Claude runs a shell command or writes a file, clawd-guard checks it: a risky call is blocked or put to you for approval, with a one-line reason, a toast and a counter above the prompt. Rules are set per user (`~/.claude/clawd-guard.json`) or per project (`.claude/clawd-guard.json`); `/guard` shows what's in effect.
+
+[Wiki](https://github.com/itsomidho/clawd-guard/wiki) · [Releases](https://github.com/itsomidho/clawd-guard/releases)
 
 ### clawd-notify
 
@@ -32,19 +42,31 @@ Before Claude runs a shell command or writes a file, clawd-guard checks it: a ri
 
 Only turns that ran a while notify, so quick answers you watched stay quiet. `/notify test` tries every channel; settings are under `/config`.
 
+[Wiki](https://github.com/itsomidho/clawd-notify/wiki) · [Releases](https://github.com/itsomidho/clawd-notify/releases)
+
 ### clawd-git
 
-![clawd-git through one session: Claude's edits marked, the By Claude filter, a diff with Review, staging, a drafted commit message and the commit graph](https://raw.githubusercontent.com/itsomidho/clawd-git/main/docs/demo.gif)
+![The panel through one real session: Claude changes two files, marked ✦ in Files and Changes; a diff, the commit graph, and the turn's restore point](https://raw.githubusercontent.com/itsomidho/clawd-git/main/docs/demo.gif)
 
-One panel docked beside the conversation, styled like clawd-statusbar, with tabs for the file tree (with search), the changes and the commit graph; a diff opens in place. Files Claude changes are marked, and **By Claude** narrows the list to them. Stage, unstage, discard and commit from the panel (it drafts the commit message), or send a diff to Claude for review. `/git-pane` shows or hides it. Pairs with clawd-tasks: the plan under the prompt, the files beside it.
+One panel docked beside the conversation, drawn like clawd-debug's: a header with the branch and a key bar, and tabs for the file tree (with search), the changes, the commit graph and **restore points**. Files Claude changes are marked, and **By Claude** narrows the list to them; **This turn** shows exactly what Claude changed since your last message. Stage, unstage, discard and commit from the panel (it drafts the message), write review notes on diff lines and send them to Claude. Before each of Claude's turns it keeps a restore point, and **Restore** puts every file back, shell changes included, kept apart from your history. `/git-pane` shows or hides it.
+
+[Wiki](https://github.com/itsomidho/clawd-git/wiki) · [Releases](https://github.com/itsomidho/clawd-git/releases)
 
 ### clawd-logs
 
-New errors in the project's logs show above the prompt, grouped with a count, with **Fix** (send it to Claude) and **Dismiss**. It finds WordPress's `debug.log` (and Bedrock's, Laravel's, and a wpdev stack's nginx log) by itself; add other files in `.claude/clawd-logs.json`. When an error appears while Claude works, Claude reads it, stack trace included, right after the tool call that caused it, so a "critical error on this website" doesn't go unnoticed. `/logs` lists the session's errors.
+![clawd-logs in a real session: a PHP fatal error lands in debug.log three times, the band above the prompt shows it once with ×3, and Fix hands it to Claude](https://raw.githubusercontent.com/itsomidho/clawd-logs/main/docs/logs.gif)
+
+New errors in the project's logs show above the prompt, grouped with a count, with **Fix** (send it to Claude), **Debug** (open the file and line in clawd-debug, when installed) and **Dismiss**. It finds WordPress's `debug.log` (and Bedrock's, Laravel's, and a wpdev stack's nginx log) by itself; add other files in `.claude/clawd-logs.json`. When an error appears while Claude works, Claude reads it, stack trace included, right after the tool call that caused it. `/logs` lists the session's errors.
+
+[Wiki](https://github.com/itsomidho/clawd-logs/wiki) · [Releases](https://github.com/itsomidho/clawd-logs/releases)
 
 ### clawd-debug
 
-A debugger beside the conversation, no editor needed. `/dbg <file>` shows the file; press `b` for a breakpoint and `t`, and Claude writes a small script that calls the code with realistic test data and starts the run. Step with `n` `s` `o` `c` while the values show next to each line. Python (debugpy, `/dbg setup`), Node (built in) and PHP with Xdebug, also inside a Docker container, with WordPress loaded through WP-CLI. With clawd-git 0.4.4, a ▷ on a file's row opens it here. You can also just ask Claude: "debug `calc_total` with test data".
+![clawd-debug in a real session: five test cases run and one fails; a breakpoint goes in cart.js, the failing case reruns alone, and stepping shows its total turn into NaN](https://raw.githubusercontent.com/itsomidho/clawd-debug/main/docs/debug.gif)
+
+A debugger beside the conversation, no editor needed. `/dbg <file>` shows the file; press `b` for a breakpoint and `t`, and Claude writes test cases with the results they should give, runs them and shows a ✓/✗ table; a failing case reruns alone, stopping at your breakpoints. Step with `n` `s` `o` `c` while every value shows next to its line; add watches, conditional breakpoints, and explore objects in place. Python (debugpy, `/dbg setup`), Node (built in) and PHP with Xdebug, also inside a Docker container, with WordPress loaded through WP-CLI. clawd-git's ▷ and clawd-logs' **Debug** open files here.
+
+[Wiki](https://github.com/itsomidho/clawd-debug/wiki) · [Releases](https://github.com/itsomidho/clawd-debug/releases)
 
 ## Install
 
