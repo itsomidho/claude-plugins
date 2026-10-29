@@ -140,6 +140,10 @@ Add an entry to `.claude-plugin/marketplace.json` whose `source` names the plugi
 claude plugin validate .
 ```
 
+## Tools
+
+[`tools/`](tools) keeps the docs current: `tools/wiki/build.py` rebuilds every plugin's GitHub wiki from its README, settings and releases, and `tools/gifs/` records the README GIFs from real Claude Code sessions. See [tools/README.md](tools/README.md).
+
 ## License
 
 MIT
