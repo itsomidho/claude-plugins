@@ -71,9 +71,11 @@ A debugger beside the conversation, no editor needed. `/dbg <file>` shows the fi
 
 ### clawd-rtl
 
+![clawd-rtl in a real session: a prompt in Persian and Claude's Persian reply, both flush right and read right to left, with src/cart.js, the numbered list and a table in their places](https://raw.githubusercontent.com/itsomidho/clawd-rtl/main/docs/rtl.gif)
+
 Persian, Arabic and Hebrew in the conversation read right to left. Messages that hold right-to-left text start on the right of the chat column, with English words, numbers, lists, headings and tables in their right places; code blocks stay left to right, and a side panel on the same rows (clawd-git, clawd-debug) stays where it is. Made for VTE terminals (Guake, GNOME Terminal); the README has the font and shell setup.
 
-[Readme](https://github.com/itsomidho/clawd-rtl#readme) · [Releases](https://github.com/itsomidho/clawd-rtl/releases)
+[Wiki](https://github.com/itsomidho/clawd-rtl/wiki) · [Releases](https://github.com/itsomidho/clawd-rtl/releases)
 
 ## Install
 

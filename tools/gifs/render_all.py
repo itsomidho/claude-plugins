@@ -1,6 +1,6 @@
 """Draws every README GIF from the recorded frames (frames/*.json) into out/.
 
-    python3 render_all.py [name…]     # clawd board guard logs demo debug
+    python3 render_all.py [name…]     # clawd board guard logs demo debug rtl
 """
 import json
 import sys
@@ -50,6 +50,12 @@ GIFS = {
         (r'FAILED', 'Five test cases run: four pass, one fails'),
         (r'PAUSED', 'The failing case reruns alone and stops at the breakpoint'),
         (r'subtotal = NaN', 'Each line shows what it set: the subtotal turns into NaN'),
+    ]),
+    'rtl': dict(frames='rtl', box=(0, 6, 100, 34), title='clawd-rtl · Claude Code', target_s=14, start=r'❯ +را بخوان', until=r'· done', captions=[
+        (r'❯ +را بخوان', 'A prompt in Persian: it reads right to left, flush right in the chat column'),
+        (r'Read 1 file', "Claude's Persian reply is drawn the same way"),
+        (r'1\.⠀', 'Numbers, lists and English words like src/cart.js keep their places'),
+        (r'└', 'Tables list their columns from the right and wrap to fit'),
     ]),
 }
 

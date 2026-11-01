@@ -57,7 +57,7 @@ def c256(n):
 
 
 def width(ch):
-    if unicodedata.combining(ch):
+    if unicodedata.combining(ch) or unicodedata.category(ch) == 'Cf':
         return 0
     return 2 if unicodedata.east_asian_width(ch) in 'WF' else 1
 
@@ -71,6 +71,8 @@ def parse(line):
             for ch in m.group(2):
                 w = width(ch)
                 if w == 0:
+                    if cells and is_arabic(cells[-1][0][:1]):
+                        cells[-1] = (cells[-1][0] + ch, cells[-1][1])
                     continue
                 cells.append((ch, dict(st)))
                 if w == 2:
@@ -126,6 +128,103 @@ def font_for(ch, st):
     return FALLBACK
 
 
+# Right-to-left text, drawn as a VTE terminal (Guake, GNOME Terminal) shows it:
+# each row ordered by the Unicode bidi algorithm with a left-to-right base,
+# then each Arabic-script word joined, in a font made for terminal cells.
+ARABIC_FONTS = [
+    str(Path.home() / '.local/share/fonts/VazirCode/Vazir-Code.ttf'),
+    '/usr/share/fonts/truetype/noto/NotoSansArabic-Regular.ttf',
+]
+_arabic_font = None
+MIRROR = dict(zip('()[]{}<>«»‹›', ')(][}{><»«›‹'))
+
+
+def is_arabic(ch):
+    return bool(ch) and unicodedata.bidirectional(ch[0]) == 'AL' and unicodedata.category(ch[0])[0] in 'LM'
+
+
+def arabic_font():
+    global _arabic_font
+    if _arabic_font is None:
+        path = next(p for p in ARABIC_FONTS if Path(p).exists())
+        _arabic_font = ImageFont.truetype(path, 15, layout_engine=ImageFont.Layout.RAQM)
+    return _arabic_font
+
+
+def bidi_levels(chars):
+    """Embedding levels of one row as a left-to-right paragraph (UAX #9, no explicit embeddings)."""
+    t = []
+    for ch in chars:
+        t.append(unicodedata.bidirectional(ch[0]) if ch else (t[-1] if t else 'L'))
+    n = len(t)
+    for i in range(n):  # W1
+        if t[i] == 'NSM':
+            t[i] = t[i - 1] if i else 'L'
+    last = 'L'
+    for i in range(n):  # W2, W3
+        if t[i] in ('L', 'R', 'AL'):
+            last = t[i]
+        elif t[i] == 'EN' and last == 'AL':
+            t[i] = 'AN'
+    t = ['R' if x == 'AL' else x for x in t]
+    for i in range(1, n - 1):  # W4
+        if t[i] == 'ES' and t[i - 1] == t[i + 1] == 'EN': t[i] = 'EN'
+        elif t[i] == 'CS' and t[i - 1] == t[i + 1] and t[i - 1] in ('EN', 'AN'): t[i] = t[i - 1]
+    for i in range(n):  # W5
+        if t[i] == 'ET':
+            j = i
+            while j < n and t[j] == 'ET': j += 1
+            if (i > 0 and t[i - 1] == 'EN') or (j < n and t[j] == 'EN'):
+                for k in range(i, j): t[k] = 'EN'
+    t = ['ON' if x in ('ES', 'ET', 'CS') else x for x in t]  # W6
+    last = 'L'
+    for i in range(n):  # W7
+        if t[i] in ('L', 'R'):
+            last = t[i]
+        elif t[i] == 'EN' and last == 'L':
+            t[i] = 'L'
+    strong = lambda x: 'R' if x in ('R', 'EN', 'AN') else x
+    i = 0
+    while i < n:  # N1, N2
+        if t[i] in ('L', 'R', 'EN', 'AN'):
+            i += 1
+            continue
+        j = i
+        while j < n and t[j] not in ('L', 'R', 'EN', 'AN'): j += 1
+        a = strong(t[i - 1]) if i else 'L'
+        b = strong(t[j]) if j < n else 'L'
+        for k in range(i, j): t[k] = a if a == b else 'L'
+        i = j
+    return [0 if x == 'L' else 1 if x == 'R' else 2 for x in t]
+
+
+def visual_order(levels):
+    """Logical index for each column, left to right (rule L2)."""
+    order = list(range(len(levels)))
+    for lv in range(max(levels, default=0), 0, -1):
+        i = 0
+        while i < len(order):
+            if levels[order[i]] >= lv:
+                j = i
+                while j < len(order) and levels[order[j]] >= lv: j += 1
+                order[i:j] = order[i:j][::-1]
+                i = j
+            else:
+                i += 1
+    return order
+
+
+def draw_word(im, text, px, py, ncells, fg):
+    """An Arabic-script word, joined, squeezed or stretched to fill its cells."""
+    f = arabic_font()
+    l, t, r, b = f.getbbox(text, direction='rtl')
+    w = max(1, r - l)
+    mask = Image.new('L', (w, CELL_H + 6), 0)
+    ImageDraw.Draw(mask).text((-l, 1), text, font=f, fill=255, direction='rtl')
+    mask = mask.resize((ncells * CELL_W, mask.height), Image.LANCZOS).crop((0, 0, ncells * CELL_W, CELL_H))
+    im.paste(Image.new('RGB', mask.size, fg), (px, py), mask)
+
+
 def draw(snap, box):
     """A snap's text, cropped to box = (col0, row0, col1, row1), as an image."""
     c0, r0, c1, r1 = box
@@ -141,7 +240,26 @@ def draw(snap, box):
     im = Image.new('RGB', ((c1 - c0) * CELL_W, (r1 - r0) * CELL_H), BG)
     d = ImageDraw.Draw(im)
     for y, line in enumerate(lines):
-        cells = parse(line)[c0:c1]
+        cells = parse(line)
+        words = []
+        if any(is_arabic(ch) or unicodedata.bidirectional(ch[:1] or 'a') == 'R' for ch, _ in cells):
+            levels = bidi_levels([ch for ch, _ in cells])
+            order = visual_order(levels)
+            pos = {li: x for x, li in enumerate(order)}
+            # Words: logical runs of Arabic-script letters in one style.
+            i = 0
+            while i < len(cells):
+                if is_arabic(cells[i][0]) and levels[i] % 2:
+                    j = i
+                    while j + 1 < len(cells) and is_arabic(cells[j + 1][0]) and cells[j + 1][1] == cells[i][1]: j += 1
+                    words.append((min(pos[i], pos[j]), j - i + 1, ''.join(c for c, _ in cells[i:j + 1]), cells[i][1]))
+                    i = j + 1
+                else:
+                    i += 1
+            inword = {pos[k] for x0, n, _, _ in words for k in range(len(cells)) if x0 <= pos[k] < x0 + n}
+            cells = [(('' if x in inword else MIRROR.get(cells[li][0], cells[li][0]) if levels[li] % 2 else cells[li][0]), cells[li][1])
+                     for x, li in enumerate(order)]
+        cells = cells[c0:c1]
         for x, (ch, st) in enumerate(cells):
             fg, bg = st['fg'] or FG, st['bg']
             if st['inv']:
@@ -164,6 +282,16 @@ def draw(snap, box):
                             d.rectangle([px + qx, py + qy, px + qx + qw - 1, py + qy + qh - 1], fill=fg)
                 else:
                     d.text((px, py + 1), ch, font=font_for(ch, st), fill=fg)
+        for x0, n, text, st in words:
+            x = x0 - c0
+            if x + n <= 0 or x >= c1 - c0:
+                continue
+            fg, bg = st['fg'] or FG, st['bg']
+            if st['inv']:
+                fg = bg or BG
+            if st['d']:
+                fg = tuple(int(a * 0.55 + b * 0.45) for a, b in zip(fg, bg or BG))
+            draw_word(im, text, x * CELL_W, y * CELL_H, n, fg)
     return im
 
 

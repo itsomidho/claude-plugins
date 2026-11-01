@@ -30,7 +30,7 @@ PROJECTS = MARKET_DIR.parent
 WIKIS = Path(os.environ.get('CLAWD_WIKIS', PROJECTS / 'clawd-wikis'))
 OWNER = 'itsomidho'
 MARKET = 'itsomidho/claude-plugins'
-PLUGINS = ['clawd-statusbar', 'clawd-tasks', 'clawd-guard', 'clawd-notify', 'clawd-git', 'clawd-logs', 'clawd-debug']
+PLUGINS = ['clawd-statusbar', 'clawd-tasks', 'clawd-guard', 'clawd-notify', 'clawd-git', 'clawd-logs', 'clawd-debug', 'clawd-rtl']
 
 # Which README sections make up each page, in order. Sections a plugin does not
 # have are skipped; a page with no section is not written (Settings is always,
@@ -46,6 +46,8 @@ PAGES = {
     'clawd-logs': {'Usage': ['The band', 'Commands', 'wpdev'], 'Settings': ['Settings', 'Config file'], 'Troubleshooting': ['Good to know']},
     'clawd-debug': {'Usage': ['How you use it', 'Test cases', 'Keys', 'What each language needs'], 'Settings': ['Settings'],
                     'How it works': ['How it works'], 'Development': ['Development']},
+    'clawd-rtl': {'Usage': ['Use', 'Limits'], 'Requirements': ['Terminal setup'], 'Settings': ['Settings'],
+                  'How it works': ['How it works'], 'Troubleshooting': ['Troubleshooting'], 'Development': ['Development']},
 }
 ORDER = ['Home', 'Installation', 'Usage', 'Settings', 'How it works', 'Troubleshooting', 'Development', 'Changelog']
 
