@@ -11,6 +11,7 @@ A [Claude Code](https://claude.com/claude-code) plugin marketplace. Each plugin 
 | [**clawd-git**](https://github.com/itsomidho/clawd-git) | [![clawd-git release](https://img.shields.io/github/v/release/itsomidho/clawd-git?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-git/releases) | A live git panel beside the conversation: the file tree, changes, colored diffs and the commit graph; marks the files Claude changed, stages and commits, and asks Claude to review a diff |
 | [**clawd-logs**](https://github.com/itsomidho/clawd-logs) | [![clawd-logs release](https://img.shields.io/github/v/release/itsomidho/clawd-logs?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-logs/releases) | Watches your project's error logs (WordPress `debug.log`, nginx, any log file): new errors above the prompt, grouped, with a Fix button, and Claude hears about the ones its own work caused |
 | [**clawd-debug**](https://github.com/itsomidho/clawd-debug) | [![clawd-debug release](https://img.shields.io/github/v/release/itsomidho/clawd-debug?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-debug/releases) | A step debugger pane: set a breakpoint, let Claude run the code with test data, and step line by line with every variable and what each line set shown next to the code (Python, Node, PHP with Xdebug) |
+| [**clawd-rtl**](https://github.com/itsomidho/clawd-rtl) | [![clawd-rtl release](https://img.shields.io/github/v/release/itsomidho/clawd-rtl?label=&color=7fbeb3)](https://github.com/itsomidho/clawd-rtl/releases) | Persian, Arabic and Hebrew read right to left: Claude's replies and your prompts start on the right of the chat column, with English words, numbers, lists and tables in place, and side panels left where they are |
 
 ### clawd-statusbar
 
@@ -68,6 +69,12 @@ A debugger beside the conversation, no editor needed. `/dbg <file>` shows the fi
 
 [Wiki](https://github.com/itsomidho/clawd-debug/wiki) · [Releases](https://github.com/itsomidho/clawd-debug/releases)
 
+### clawd-rtl
+
+Persian, Arabic and Hebrew in the conversation read right to left. Messages that hold right-to-left text start on the right of the chat column, with English words, numbers, lists, headings and tables in their right places; code blocks stay left to right, and a side panel on the same rows (clawd-git, clawd-debug) stays where it is. Made for VTE terminals (Guake, GNOME Terminal); the README has the font and shell setup.
+
+[Readme](https://github.com/itsomidho/clawd-rtl#readme) · [Releases](https://github.com/itsomidho/clawd-rtl/releases)
+
 ## Install
 
 In Claude Code, type:
@@ -80,6 +87,7 @@ In Claude Code, type:
 /plugin install clawd-git --marketplace itsomidho/claude-plugins
 /plugin install clawd-logs --marketplace itsomidho/claude-plugins
 /plugin install clawd-debug --marketplace itsomidho/claude-plugins
+/plugin install clawd-rtl --marketplace itsomidho/claude-plugins
 ```
 
 Answer `y` to add the marketplace the first time, then choose a scope. Once it is added, `/plugin install <plugin>@itsomidho` is enough.
@@ -94,6 +102,7 @@ claude plugin install clawd-notify --marketplace itsomidho/claude-plugins
 claude plugin install clawd-git --marketplace itsomidho/claude-plugins
 claude plugin install clawd-logs --marketplace itsomidho/claude-plugins
 claude plugin install clawd-debug --marketplace itsomidho/claude-plugins
+claude plugin install clawd-rtl --marketplace itsomidho/claude-plugins
 ```
 
 In the desktop app: click + next to the prompt box, then Plugins, Add marketplace with `itsomidho/claude-plugins`, then Add plugin.
@@ -105,7 +114,7 @@ claude plugin marketplace update itsomidho
 claude plugin update <plugin>@itsomidho
 ```
 
-Then `/reload-plugins`. What changed in each version is in the plugin's releases: [clawd-statusbar](https://github.com/itsomidho/clawd-statusbar/releases), [clawd-tasks](https://github.com/itsomidho/clawd-tasks/releases), [clawd-guard](https://github.com/itsomidho/clawd-guard/releases), [clawd-notify](https://github.com/itsomidho/clawd-notify/releases), [clawd-git](https://github.com/itsomidho/clawd-git/releases), [clawd-logs](https://github.com/itsomidho/clawd-logs/releases), [clawd-debug](https://github.com/itsomidho/clawd-debug/releases).
+Then `/reload-plugins`. What changed in each version is in the plugin's releases: [clawd-statusbar](https://github.com/itsomidho/clawd-statusbar/releases), [clawd-tasks](https://github.com/itsomidho/clawd-tasks/releases), [clawd-guard](https://github.com/itsomidho/clawd-guard/releases), [clawd-notify](https://github.com/itsomidho/clawd-notify/releases), [clawd-git](https://github.com/itsomidho/clawd-git/releases), [clawd-logs](https://github.com/itsomidho/clawd-logs/releases), [clawd-debug](https://github.com/itsomidho/clawd-debug/releases), [clawd-rtl](https://github.com/itsomidho/clawd-rtl/releases).
 
 ## Troubleshooting
 

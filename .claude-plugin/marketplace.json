@@ -40,6 +40,11 @@
       "name": "clawd-debug",
       "source": { "source": "github", "repo": "itsomidho/clawd-debug" },
       "description": "A step debugger beside the conversation: set a breakpoint, let Claude run your code with test data, and step line by line while every variable and line value shows"
+    },
+    {
+      "name": "clawd-rtl",
+      "source": { "source": "github", "repo": "itsomidho/clawd-rtl" },
+      "description": "Persian, Arabic and Hebrew in the conversation read right to left: Claude's replies and your prompts start on the right of the chat column, with side panels left in place"
     }
   ]
 }
